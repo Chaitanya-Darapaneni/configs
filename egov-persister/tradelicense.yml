@@ -852,8 +852,7 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-
-    - query: INSERT INTO eg_tl_dscdocument( id, tenantid, documenttype,  filestoreid ,tradelicensedetailid, applicationnumber , approvedby , createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET  documenttype =?, filestoreid =?, lastmodifiedby =?, lastmodifiedtime =?;
+    - query: INSERT INTO eg_tl_dscdocument( id, tenantid, documenttype,  filestoreid ,tradelicensedetailid, approvedby ,applicationnumber , createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET  documenttype =?, filestoreid =?, lastmodifiedby =?, lastmodifiedtime =?;
       basePath: Licenses.*.tradeLicenseDetail.dscDocuments.*
       jsonMaps:
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.id
@@ -864,11 +863,11 @@ serviceMaps:
 
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.fileStoreId
 
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].applicationNumber
+      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].tradeLicenseDetail.id
       
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.approvedBy
       
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].tradeLicenseDetail.id
+      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].applicationNumber
 
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.createdBy
 
@@ -885,3 +884,4 @@ serviceMaps:
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedBy
 
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedTime
+
