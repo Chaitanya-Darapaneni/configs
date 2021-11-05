@@ -783,7 +783,7 @@ serviceMaps:
 
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.verificationDocuments[*].id)].auditDetails.lastModifiedTime
 
-    - query: INSERT INTO eg_tl_dscdocument( id, tenantid, documenttype,  filestoreid ,tradelicensedetailid, approvedby ,applicationnumber , createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET  documenttype =?, filestoreid =?, lastmodifiedby =?, lastmodifiedtime =?;
+    - query: INSERT INTO eg_tl_dscdocument( id, tenantid, documenttype,  filestoreid ,tradelicensedetailid, approvedby ,applicationnumber , createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ;
       basePath: Licenses.*.tradeLicenseDetail.dscDocuments.*
       jsonMaps:
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.id
@@ -805,14 +805,6 @@ serviceMaps:
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedBy
 
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.createdTime
-
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedTime
-
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.documentType
-
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.fileStoreId
-
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedBy
 
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedTime
  
@@ -885,36 +877,18 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: INSERT INTO eg_tl_dscdocument( id, tenantid, documenttype,  filestoreid ,tradelicensedetailid, approvedby ,applicationnumber , createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET  documenttype =?, filestoreid =?, lastmodifiedby =?, lastmodifiedtime =?;
+
+    - query: UPDATE eg_tl_dscdocument SET  documenttype =?, filestoreid =?, lastmodifiedby =?, lastmodifiedtime =? where id = ? ;
       basePath: Licenses.*.tradeLicenseDetail.dscDocuments.*
       jsonMaps:
+
+      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.documentType
+
+      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.fileStoreId
+
+      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedBy
+
+      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedTime
+      
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.id
-
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.tenantId
-
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.documentType
-
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.fileStoreId
-
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].tradeLicenseDetail.id
-      
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.approvedBy
-      
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].applicationNumber
-
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.createdBy
-
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedBy
-
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.createdTime
-
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedTime
-
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.documentType
-
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDocuments.*.fileStoreId
-
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedBy
-
-      - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDocuments[*].id)].auditDetails.lastModifiedTime
 
