@@ -783,7 +783,7 @@ serviceMaps:
 
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.verificationDocuments[*].id)].auditDetails.lastModifiedTime
       
-    - query: INSERT INTO eg_tl_dscdetails( id, tenantid, documenttype,  filestoreid , additionaldetail , tradelicensedetailid, approvedby ,applicationnumber , createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ;
+    - query: INSERT INTO eg_tl_dscdetails( id, tenantid, documenttype,  filestoreid , additionaldetail , tradelicensedetailid, approvedby ,applicationnumber , createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ;
       basePath: Licenses.*.tradeLicenseDetail.dscDetails.*
       jsonMaps:
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.id
