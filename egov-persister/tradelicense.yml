@@ -783,7 +783,7 @@ serviceMaps:
 
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.verificationDocuments[*].id)].auditDetails.lastModifiedTime
       
-    - query: INSERT INTO eg_tl_dscdetails( id, tenantid, documenttype,  filestoreid , additionaldetail , tradelicensedetailid, approvedby ,applicationnumber , createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ;
+    - query: INSERT INTO eg_tl_dscdetails( id, tenantid, documenttype,  documentid  , additionaldetail , tradelicensedetailid, approvedby ,applicationnumber , createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ;
       basePath: Licenses.*.tradeLicenseDetail.dscDetails.*
       jsonMaps:
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.id
@@ -792,7 +792,7 @@ serviceMaps:
 
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.documentType
 
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.fileStoreId
+      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.documentId
       
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.additionalDetail
         type: JSON
@@ -881,13 +881,13 @@ serviceMaps:
     queryMaps:
 
 
-    - query: UPDATE eg_tl_dscdetails SET  documenttype =?, filestoreid =?, additionaldetail = ? , lastmodifiedby =?, lastmodifiedtime =? where id = ? ;
+    - query: UPDATE eg_tl_dscdetails SET  documenttype =?, documentid =?, additionaldetail = ? , lastmodifiedby =?, lastmodifiedtime =? where id = ? ;
       basePath: Licenses.*.tradeLicenseDetail.dscDetails.*
       jsonMaps:
 
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.documentType
 
-      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.fileStoreId
+      - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.documentId
       
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.additionalDetail
         type: JSON
@@ -898,3 +898,4 @@ serviceMaps:
       - jsonPath: $.Licenses[*][?({id} in @.tradeLicenseDetail.dscDetails[*].id)].auditDetails.lastModifiedTime
       
       - jsonPath: $.Licenses.*.tradeLicenseDetail.dscDetails.*.id
+
