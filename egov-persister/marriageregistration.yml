@@ -1081,7 +1081,7 @@ serviceMaps:
    queryMaps:
 
        - query: UPDATE eg_mr_dscdetails SET  documenttype =?, documentid =?, additionaldetail = ? , lastmodifiedby =?, lastmodifiedtime =? where id = ? 
-          basePath: MarriageRegistrations.*.dscDetails.*
+         basePath: MarriageRegistrations.*.dscDetails.*
          jsonMaps:
           - jsonPath: $.MarriageRegistrations.*.dscDetails.*.documentType
          
