@@ -1073,3 +1073,26 @@ serviceMaps:
           - jsonPath: $.MarriageRegistrations.*.auditDetails.lastModifiedTime
 
           - jsonPath: $.MarriageRegistrations.*.marriagePlace.id
+          
+ - version: 1.0
+   description: Persists marriageRegistartion Digitally signed Certificate filestoreid in  eg_mr_dscdetails table
+   fromTopic: update-mr-dscdetails
+   isTransaction: true
+   queryMaps:
+
+       - query: UPDATE eg_mr_dscdetails SET  documenttype =?, documentid =?, additionaldetail = ? , lastmodifiedby =?, lastmodifiedtime =? where id = ? 
+          basePath: MarriageRegistrations.*.dscDetails.*
+         jsonMaps:
+          - jsonPath: $.MarriageRegistrations.*.dscDetails.*.documentType
+         
+          - jsonPath: $.MarriageRegistrations.*.dscDetails.*.documentId
+         
+          - jsonPath: $.MarriageRegistrations.*.dscDetails.*.additionalDetail
+            type: JSON
+            dbType: JSONB
+
+          - jsonPath: $.MarriageRegistrations[*][?({id} in @.dscDetails[*].id)].auditDetails.lastModifiedBy
+
+          - jsonPath: $.MarriageRegistrations[*][?({id} in @.dscDetails[*].id)].auditDetails.lastModifiedTime
+
+          - jsonPath: $.MarriageRegistrations.*.dscDetails.*.id          
